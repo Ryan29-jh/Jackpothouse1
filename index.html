@@ -1,18 +1,30 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
+  <meta charset="UTF-8" />
   <title>Jackpot House</title>
+
+  <!-- Preload hint for background -->
+  <link rel="preload" href="https://i.imgur.com/o33fdSt.jpg" as="image" />
+
   <style>
+    /* Use a fast placeholder background until JS swaps in the full image */
     body {
       margin: 0;
       padding: 0;
-      background: url('https://i.imgur.com/o33fdSt.jpg') no-repeat center center fixed;
+      background: linear-gradient(180deg,#060606 0%, #111 100%);
+      background-repeat: no-repeat;
+      background-position: center center;
       background-size: cover;
       font-family: Arial, sans-serif;
       color: #fff;
       min-height: 100vh;
+      transition: background-image 400ms ease-in-out, opacity 250ms ease-in-out;
     }
+    body.bg-loaded {
+      /* when JS sets background-image inline it will transition smoothly */
+    }
+
     .centered-landing {
       position: fixed;
       z-index: 10;
@@ -251,7 +263,7 @@
     }
     /* Game Rules text override */
     .footer-btn-col .footer-text.gamerules-desc {
-      color: #ffe066; /* Same as contact and playwin text */
+      color: #ffe066;
       font-size: 1em;
       font-weight: 500;
     }
@@ -295,7 +307,7 @@
       border-radius: 50%;
       width: 40px;
       height: 40px;
-      cursor: pointer;
+      cursor: button;
       line-height: 1;
       z-index: 2;
       transition: background 0.2s;
@@ -329,73 +341,93 @@
     }
   </style>
 </head>
-<body>
+
+<!-- store the big background URL in a data attribute and let JS swap it in after it's loaded -->
+<body data-bg="https://i.imgur.com/o33fdSt.jpg">
   <!-- Landing Screen -->
   <div class="centered-landing" id="landing">
     <div class="landing-title">Welcome to Jackpot House</div>
     <div class="landing-tagline">Step in for your chance to <span style="color:#ffcc00; font-weight:bold;">WIN BIG!</span></div>
-    <img src="https://i.imgur.com/vJN7MdV.png" alt="Logo" class="landing-logo" />
+    <img src="https://i.imgur.com/vJN7MdV.png" alt="Logo" class="landing-logo" loading="lazy" decoding="async" />
     <button class="enter-btn" id="enterBtn">ENTER</button>
   </div>
 
   <!-- Main Content -->
   <div class="container" id="mainContent">
     <div class="main-title">Jackpot House</div>
-    <img src="https://i.imgur.com/vJN7MdV.png" alt="Logo" class="logo" />
+    <img src="https://i.imgur.com/vJN7MdV.png" alt="Logo" class="logo" loading="lazy" decoding="async" />
     <div class="cta-message">
       Spin, win, and feel the excitement — your jackpot awaits!
     </div>
     <h1>Game Gallery</h1>
     <div class="games-grid">
       <a class="game-card" href="https://www.cashmachine777.com/" target="_blank" title="Play Cash Machine">
-        <img src="https://i.imgur.com/QVo4Iwo.png" alt="Cash Machine"/>
+        <img src="https://i.imgur.com/QVo4Iwo.png" alt="Cash Machine" loading="lazy" decoding="async" />
         <div class="game-label">Cash Machine</div>
       </a>
       <a class="game-card" href="https://www.gameroom777.com/" target="_blank" title="Play Game Room">
-        <img src="https://i.imgur.com/wkWz5Pb.png" alt="Game Room"/>
+        <img src="https://i.imgur.com/wkWz5Pb.png" alt="Game Room" loading="lazy" decoding="async" />
         <div class="game-label">Game Room</div>
       </a>
       <a class="game-card" href="https://download.gamevault999.com/" target="_blank" title="Play Game Vault">
-        <img src="https://i.imgur.com/9HciD0V.png" alt="Game Vault"/>
+        <img src="https://i.imgur.com/9HciD0V.png" alt="Game Vault" loading="lazy" decoding="async" />
         <div class="game-label">Game Vault</div>
       </a>
       <a class="game-card" href="https://dl.juwa777.com/" target="_blank" title="Play Juwa">
-        <img src="https://i.imgur.com/yqVJcc2.png" alt="Juwa"/>
+        <img src="https://i.imgur.com/yqVJcc2.png" alt="Juwa" loading="lazy" decoding="async" />
         <div class="game-label">Juwa</div>
       </a>
       <a class="game-card" href="https://milkywayapp.xyz/" target="_blank" title="Play Milkyway">
-        <img src="https://i.imgur.com/Hz6o6P1.png" alt="Milkyway"/>
+        <img src="https://i.imgur.com/Hz6o6P1.png" alt="Milkyway" loading="lazy" decoding="async" />
         <div class="game-label">Milkyway</div>
       </a>
       <a class="game-card" href="http://start.orionstars.vip:8580/index.html" target="_blank" title="Play Orion Star">
-        <img src="https://i.imgur.com/aCOkxwM.png" alt="Orion Star"/>
+        <img src="https://i.imgur.com/aCOkxwM.png" alt="Orion Star" loading="lazy" decoding="async" />
         <div class="game-label">Orion Star</div>
       </a>
       <a class="game-card" href="https://m.lasvegassweeps.com/" target="_blank" title="Play Vegas Sweeps">
-        <img src="https://i.imgur.com/kpTnfDU.png" alt="Vegas Sweeps"/>
+        <img src="https://i.imgur.com/kpTnfDU.png" alt="Vegas Sweeps" loading="lazy" decoding="async" />
         <div class="game-label">Vegas Sweeps</div>
       </a>
+
+      <!-- New game cards appended -->
+      <a class="game-card" href="https://www.vblink777.club/" target="_blank" title="Play Vblink">
+        <img src="https://i.imgur.com/9qskkit.jpeg" alt="Vblink" loading="lazy" decoding="async" />
+        <div class="game-label">Vblink</div>
+      </a>
+
+      <a class="game-card" href="http://start.firekirin.xyz:8580/index.html" target="_blank" title="Play Fire Kirin">
+        <img src="https://i.imgur.com/snhOmQX.jpeg" alt="Fire Kirin" loading="lazy" decoding="async" />
+        <div class="game-label">Fire Kirin</div>
+      </a>
+
+      <a class="game-card" href="https://yolo777.game/" target="_blank" title="Play Yolo">
+        <img src="https://i.imgur.com/rK5ctkd.jpeg" alt="Yolo" loading="lazy" decoding="async" />
+        <div class="game-label">Yolo</div>
+      </a>
+
     </div>
+
     <!-- Footer Bar for Buttons -->
     <div class="footer-bar">
       <div class="footer-buttons-row">
         <div class="footer-btn-col">
           <a class="footer-btn playwin" href="https://www.facebook.com/house.jackpot999" target="_blank" title="Play & Win - Message us!">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" loading="lazy" decoding="async" />
             Play & Win
           </a>
           <div class="footer-text">To play and win games, message us here!</div>
         </div>
         <div class="footer-btn-col">
           <a class="footer-btn" href="https://www.facebook.com/profile.php?id=61557708551360" target="_blank" title="Contact for support">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" />
+            <img src="https://upload.wikimedia.org/wikipedia/commons/5/51/Facebook_f_logo_%282019%29.svg" alt="Facebook" loading="lazy" decoding="async" />
             Contact
           </a>
           <div class="footer-text">For support or questions, click the button above.</div>
         </div>
         <div class="footer-btn-col">
           <button class="footer-btn" id="showRulesBtn" type="button">
-            <img src="https://i.imgur.com/8TjkQzg.png" alt="Game Rules" />
+            <img src="https://i.imgur.com/8TjkQzg.png" alt="Game Rules" loading="lazy" decoding="async" />
             Game Rules
           </button>
           <div class="footer-text gamerules-desc">View how to play and win big!</div>
@@ -403,14 +435,33 @@
       </div>
     </div>
   </div>
+
   <!-- Modal popup for Game Rules image (OUTSIDE .container) -->
   <div id="gameRulesModal">
     <div class="modal-inner">
       <button id="closeRulesBtn" title="Close">&times;</button>
-      <img src="https://i.imgur.com/mhju5du.png" alt="Game Rules" />
+      <img src="https://i.imgur.com/mhju5du.png" alt="Game Rules" loading="lazy" decoding="async" />
     </div>
   </div>
+
   <script>
+    // Lazy-swap the large background after it finishes loading to avoid blocking initial paint.
+    (function () {
+      var body = document.body;
+      var bg = body.getAttribute('data-bg');
+      if (!bg) return;
+
+      // Start loading via JS Image so we can add class when loaded
+      var img = new Image();
+      img.src = bg;
+      img.onload = function () {
+        // set background-image inline so CSS transition runs
+        body.style.backgroundImage = 'url("' + bg + '")';
+        body.classList.add('bg-loaded');
+      };
+      // optional: if image fails, we keep the placeholder gradient
+    })();
+
     // Handles transition from landing to main content
     document.getElementById('enterBtn').addEventListener('click', function() {
       document.getElementById('landing').classList.add('hide');
@@ -419,6 +470,7 @@
         document.getElementById('mainContent').classList.add('show');
       }, 500); // match CSS transition
     });
+
     // Game Rules popup logic
     document.getElementById('showRulesBtn').onclick = function() {
       document.getElementById('gameRulesModal').style.display = 'flex';
